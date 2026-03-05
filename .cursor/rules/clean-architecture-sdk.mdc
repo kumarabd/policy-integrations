@@ -1,0 +1,34 @@
+---
+description: Clean architecture, SDK usage, and maintainability standards
+globs: **/*.go
+alwaysApply: true
+---
+
+# Clean Architecture and SDK Usage
+
+## Clean Code Architecture
+
+- **Layered structure**: Keep `cmd/` as thin entry points; business logic in `pkg/`
+- **Dependency direction**: Dependencies point inward (cmd → pkg, pkg → policy-sdk-go)
+- **Single responsibility**: One concern per package/function
+- **Interfaces at boundaries**: Define interfaces in the consumer; implement in the provider
+
+## Policy SDK (`policy-sdk-go`)
+
+The SDK controls code shared across policy-machine, policy-integrations, and other systems.
+
+- **Use the SDK for**:
+  - PDP client (evaluate, decisions)
+  - Control plane client (subjects, objects, rules, attributes)
+  - Caching, versioning, telemetry
+  - Policy request/response types
+- **Do not duplicate** in policy-integrations what the SDK already provides
+- **Prefer SDK types** over local copies of models or helpers
+
+## Readability and Maintainability
+
+- **Names**: Clear, descriptive; avoid abbreviations except common ones (e.g., `id`, `ctx`)
+- **Functions**: Small; one level of abstraction; descriptive names over comments
+- **Packages**: Cohesive; minimal public API (export only what callers need)
+- **Comments**: Explain "why" and non-obvious constraints, not "what"
+- **Error handling**: Wrap with context; avoid swallowing errors

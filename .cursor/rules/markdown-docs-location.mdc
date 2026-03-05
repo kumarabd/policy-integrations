@@ -1,0 +1,19 @@
+---
+description: Place all new markdown documentation in the docs folder
+alwaysApply: true
+---
+
+# Markdown Documentation Location
+
+All new markdown (`.md`) documentation files must be created inside the `docs/` folder.
+
+## Path convention
+
+- **✅ Correct**: `docs/my-feature.md`, `docs/CLUSTER_RBAC_SEEDING_PLAN.md`, `docs/README-setup.md`
+- **❌ Incorrect**: `my-feature.md` (root), `deploy/README-seeder.md` (use `docs/` instead when creating new docs)
+
+## When to apply
+
+- Creating new documentation or README-style content
+- Adding design docs, plans, or guides
+- The root `README.md` is the exception for project overview

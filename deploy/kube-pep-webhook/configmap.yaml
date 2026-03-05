@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: pep-webhook-config
-  namespace: default
-data:
-  # Optional: Add any additional configuration here
-  # Most configuration is done via environment variables in deployment.yaml
-

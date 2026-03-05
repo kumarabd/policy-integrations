@@ -1,18 +1,17 @@
-help: ## Show this help message
-	@echo "Available targets:"
-	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z_-]+:.*##/ { printf "  %-15s %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
+.PHONY: help build seed webhook
 
-check: ## Run linting checks
-	golangci-lint run
+help:
+	@echo "policy-integrations - Kubernetes integration for Policy Machine"
+	@echo ""
+	@echo "Targets:"
+	@echo "  build   - Build both binaries"
+	@echo "  seed    - Build policy-seed-k8s"
+	@echo "  webhook - Build kube-pep-webhook"
 
-test: ## Run tests with coverage
-	go test ./... -cover
+build: seed webhook
 
-build: ## Build the webhook binary
-	go build -ldflags "-w -s" -o kube-pep-webhook ./cmd/kube-pep-webhook
+seed:
+	go build -o policy-seed-k8s ./cmd/policy-seed-k8s
 
-run: ## Run the webhook locally (requires env vars)
-	go run ./cmd/kube-pep-webhook
-
-.PHONY: help check test build run
-
+webhook:
+	go build -o kube-pep-webhook ./cmd/kube-pep-webhook
